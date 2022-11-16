@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap");
+      @keyframes topAnimation {
+        0% {
+          opacity: 0;
+          transform: translateY(-10%);
+          /* filter: blur(5px); */
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        height: 20vh;
+        width: 10vw;
+        min-width: 600px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      .navlink {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 0 3px;
+        margin-left: 80px;
+        animation: 1s ease-out 0s 1 leftAnimation;
+      }
+      .navlink:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      .navlink:hover {
+        color: #ffffff;
+      }
+      .navlink:hover:after {
+        width: 100%;
+      }
+      a {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+      }
+      a:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -1px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: #ffffff;
+      }
+      a:hover:after {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 3;
+        font-weight: 500;
+      }
+      br {
+        font-size: 200%;
+      }
+      /**/
+      body {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: #182994;
+        font-family: "Inter", "Arial", sans-serif;
+        color: white;
+        margin: none;
+        overflow-x: hidden;
+      }
+      .logo {
+        height: 100px;
+        width: 100px;
+        float: right;
+        position: absolute;
+        top: 80px;
+        right: 80px;
+      }
+      .navbar {
+        overflow: hidden;
+        width: 100%;
+        z-index: 4;
+      }
+
+      .headline-photo {
+        width: 100vw;
+        height: 90vh;
+        position: relative;
+      }
+
+      .wallpaper {
+        width: 100vw;
+        height: 90vh;
+        position: absolute;
+        object-fit: cover;
+      }
+      .project-name {
+        z-index: 100;
+        position: absolute;
+        font-size: 4rem;
+        padding-left: 6vw;
+        line-height: 1.2;
+        width: 80vw;
+        bottom: 5;
+        padding-bottom: 1vh;
+        padding-left: 6vw;
+        bottom: 4vh;
+        left: 0;
+      }
+      .project {
+        z-index: 100;
+        position: absolute;
+        font-size: 0.97rem;
+      }
+      .section1 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #577373;
+      }
+      .section2 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #184151;
+      }
+      .section3 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #314c50;
+      }
+      .section4 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #4f5652;
+      }
+      .section5 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #abad94;
+        color: #0d0e09;
+      }
+      .section6 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #18302c;
+      }
+      .section7 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #9c838e;
+      }
+      .progress-bar {
+        position: fixed;
+        background-color: black;
+        top: 0;
+        width: 100%;
+        height: 2.3vh;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
+      .progress {
+        width: 300px;
+        height: 2px;
+        background: #636363;
+        float: left;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .footer {
+        position: fixed;
+        top: 0vh;
+        padding-left: 2vw;
+        width: 100%;
+        height: 3vh;
+        z-index: 5;
+        display: none;
+        align-items: center;
+        background-color: black;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      .footer .progress {
+        position: absolute;
+        width: 300px;
+        height: 2px;
+        background: #3f3f3f;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .center {
+        top: 50%;
+        left: 50%;
+      }
+      .footer .progress .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .scroll-load {
+        display: none;
+      }
+      i {
+        background: black;
+        border-radius: 500px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .img-icon {
+        display: block;
+      }
+      .topBtn {
+        display: none;
+        position: fixed;
+        bottom: 2.5vh;
+        right: 2.5vw;
+        transition: all 0.5s ease;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      figure {
+        width: 4vw;
+        height: 4vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: black;
+        transition: all 0.5s ease;
+      }
+      figure:hover {
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      figure img {
+        transition-duration: 1s;
+        display: inline-block;
+        width: 30px;
+        height: auto;
+      }
+      .quote {
+        text-align: center;
+        font-style: italic;
+        line-height: 3vh;
+        padding: 5vw;
+      }
+      .quote_credit {
+        text-align: right;
+        padding: 10px;
+        font-style: italic;
+      }
+      * {
+        scroll-behavior: smooth;
+      }
+      .h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 3vh;
+      }
+      .content {
+        font-weight: 300;
+      }
+      i {
+        background: none;
+        text-align: left;
+      }
+      ol,
+      ul {
+        padding-left: 3vw;
+      }
+      blockquote {
+        padding: 3vw;
+      }
+    </style>
+    <link href="./img/page_logo.png" rel="icon" />
+    <title>J.Pean Blogspot</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="headline-photo">
+        <img class="wallpaper" src="./img/corpus_.png" />
+        <div class="navbar">
+          <nav>
+            <a href="../index.html" class="navlink">Home</a>
+            <a href="./about.html" class="navlink">About</a>
+            <img src="./img/page_logo.png" alt="logo" class="logo" />
+          </nav>
+        </div>
+        <span class="project-name"
+          ><span>Corpus</span><br />
+          Simple Ways to a Self-Care Routine: A Guide to Get You Started.</span
+        >
+      </div>
+    </div>
+    <div class="footer" id="progress-div">
+      <span class="progress-text"
+        >Simple Ways to a Self-Care Routine: A Guide to Get You Started.</span
+      >
+      <div class="progress center">
+        <div class="bar center" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="topBtn" id="topbtn">
+      <figure onclick="scrollToTop()">
+        <img src="./img/arrow-up.png" alt="image" />
+      </figure>
+    </div>
+    <div class="section2 content">
+      <span class="h1"></span>
+      Being able to take care of it is one of the best forms of self-love we can
+      do for ourselves. Further, improving bit by bit is key in creating large
+      changes and appreciation with your body.<br /><br />
+      Here are four main components from which you can improve: your skincare
+      routine, showering habits, sleep, and exercise. <br /><br />Here are the
+      following easy to follow tips that I have learned from reading medical
+      journals, and following medical practitioners to guide you, from which
+      they have guided me into building my own routine.
+    </div>
+    <div class="section3 content">
+      <span class="h1">1.1. Skincare Routine</span><br /><br />
+
+      <i>General Rule of Thumb </i> <br /><br />I will not list the exact
+      products I use but only the <i>active ingredients</i> that are on it. This
+      is to ensure you find a product that works for you and simplify your
+      routine away from being too complex. I recommend Skin Carisma and INCI
+      Decoder for checking the safety and effectiveness of products you use and
+      you consider buying. These two sites have one of the reputable sources for
+      both really ineffective and highly effective skincare products.
+      <br /><br />Also, expensive does not always mean effective, the simpler
+      your routine is the better it is.<br /><br />
+      Simply put, this routine is for morning:
+      <ol>
+        <li>Cleanser</li>
+        <li>Sunscreen</li>
+        <li>Spot Treatment (optional)</li>
+      </ol>
+      And, this is for evening:
+      <ol>
+        <li>Cleanser</li>
+        <li>Retinol</li>
+        <li>Spot Treatment (optional)</li>
+      </ol>
+      <br />
+      <b>Cleanser</b><br /><br />
+      Everyday, our skin is constantly bombarded with dirt, sweat, and
+      pollutants so cleansing it twice a day, morning and evening, is vital in
+      maintaining the healthy look of it. Ingredients to consider are
+      <i>vitamin C, ceramides, retinol, salicylic acid,and glycerin </i>among
+      others. <br /><br /><b>Day: Sunscreen</b><br /><br />
+      This is by far what dermatologists strongly advise to always use when
+      going outside even if it's a cloudy day. Sunscreen protects the skin from
+      premature aging and adding to that there is no such thing as a healthy
+      tan. Dermatologists stress that tanning is a way for the skin to protect
+      itself by destroying it, and mostly one of the leading risks of it is skin
+      cancer. <br /><br />As a rule of thumb a good sunscreen has both SPF30+
+      and PA+++ or better (SPF 50 & PA++++).<br /><br />
+      For PA+++, it protects the skin from UVB rays, these rays are still
+      present even on cloudy days. <br /><br />For SPF, it protects the skin
+      from UVA rays, these rays are the one responsible for having a tan and are
+      most powerful on a clear day. <br /><br /><b>Night: Retinol</b
+      ><br /><br />
+      Retinol and its derivatives like retinoic acid unclogs pores, is a potent
+      anti-aging product that reduces fine lines and any signs of premature
+      aging <br /><br /><i>Moisturizer? Should you use one?</i> <br /><br />In
+      hot and humid climates, like the Philippines, moisturizer is not essential
+      since the skin barrier automatically absorbs water in the atmosphere.
+      However, moisturizer will be needed if someone is prone to dry skin or
+      lives in a cold climate, like Baguio. This is because since the air is not
+      humid, thus, no water the skin does not trap water, but rather releases
+      it. Therefore, a moisturizer is needed to trap it and preserve the skin
+      barrier, which gives the skin a plush and healthy look. <br /><br /><b
+        >Spot treatments</b
+      >
+      <br /><br />These are a product recommendation for treating specific skin
+      concerns which have specialized ingredients. <br /><br />For acne,
+      <i>erythromycin</i> is a good antibacterial in treating it, as well as
+      <i>benzoyl peroxide</i>. <br /><br />For blackheads and whiteheads,
+      <i>salicylic acid</i> is a powerful ingredient that deeply cleans the
+      pores and declogs it of debris. <br /><br />For light chemical peeling,
+      which renews your skin, a peeling solution is applied once a week
+      containing AHA/BHA acids such as
+      <i>lactic, glycolic, mandelic, and salicylic acid</i> helps in overall
+      cell turnover, revealing new and youthful skin.
+    </div>
+
+    <div class="section4 content">
+      <span class="h1"> 1.2. Showering </span><br /><br />
+      Now, the following may cause some debate but doing the bare minimum for
+      yourself of showering is more than enough. Moreover, if you are sweaty
+      from an intense activity like an exercise, or just have a bad odor from
+      the day, that simply calls for a shower. But if you just did no sweat, and
+      just no smell, there's no mandatory rule to shower.
+      <br /><br />Furthermore, a 4-5 minute of showering with focus on cleaning
+      your groin and armpit area will be as good as cleaning your whole body.
+      Moreover, having fine hair, or simply having itchy scalp calls for
+      shampooing, if not, or just having more curly hair, you can just go by not
+      showering. Just in general, listen to your body and what it needs, briefer
+      or lesser times of showering does not mean it's not as good as showering
+      frequently.
+    </div>
+    <div class="section5 content">
+      <span class="h1">1.3. Sleep</span><br /><br />
+      Sleep is powerful. And perhaps, the one that is being left for granted the
+      most. Mastering your sleep and clearing some misconceptions from it is key
+      in creating a good, and restful sleep. <br /><br />Now, 7-8 hours of sleep
+      is just average but it's not for everyone. Every person has different
+      lengths of sleep where they feel well rested. Here are the three questions
+      to assess whether the length and quality of your sleep is just fine:
+      <br />
+      <ol>
+        <li>Do you feel really rested during the day?</li>
+        <li>Can you not fall asleep involuntarily during the day?</li>
+        <li>
+          Do you generally fall asleep through the night without disturbances?
+        </li>
+      </ol>
+      <br />If you answer all three, then your length of sleep is just enough
+      and suits you. If not, it is a very good time to pinpoint some hindrances
+      keeping you from it? Here are key tips in improving your sleep:<br /><br />
+      <ul>
+        <li>
+          Cool resting place - pre-cooling your bed is key in making you fall
+          asleep faster
+        </li>
+        <li>
+          Silent and tranquil environment - find a place that you can fully
+          relax away from any disturbances or noise
+        </li>
+        <li>
+          Keep away Phones and Gadgets in Bed - doing this in your bed creates
+          an association with it to stay awake. This association ruins your
+          intention of ever falling asleep in your bed. Make sure to make it as
+          hard for you to bring your phone/gadgets in your bed. Locking it out
+          in place, or simply putting your phone in bedtime mode and keeping it
+          as far away from your bed will make you regain control of your
+          association with your bed for resting.
+        </li>
+        <li>
+          Writing up in a Diary/Taking Note - sometimes our mind wanders around
+          and makes us unsettle our thoughts. Simply journaling and taking note
+          of these thoughts help in calming ourselves down, and we can go back
+          to these thoughts in the morning when we are well-rested.
+        </li>
+        <li>
+          Therapy - If there are things way beyond the remedy recommended here,
+          it is best to consult a health professional to help you get rested. A
+          therapy has been proven to effectively help people with chronic
+          trouble in falling asleep (Cognitive Behavioral Therapy for Insomnia).
+        </li>
+      </ul>
+      <br />
+
+      <i>Want to Easily Wake Up? Time your sleep.</i><br /><br />
+      Do you wanna easily wake up to your alarm? Then, with your length of
+      sleep, consider the timing of when you sleep. A whole sleep cycle lasts
+      for 1.5 hours, and this website, SleepoPolis, recommends some specific
+      time when you should fall asleep. This timing accounts when your sleep
+      cycle ends, so that when your alarm hits off, you will easily be awake. Do
+      take note to have a 30 minutes before the recommended time so that by the
+      recommended timing your sleep cycle is already starting. <br /><br /><i
+        >Want a Relaxed Morning Wake Up Call? Choose your alarm wisely.</i
+      ><br /><br />
+      Have you ever dreaded or hated hearing your alarm? Maybe consider subtle
+      alarm sounds that do not really put you on high alert. It is recommended
+      that you use pleasing tones so that you do not activate your fight/flight
+      mode. This mode is usually associated with panic, distress, and overall
+      unpleasant feeling such as annoyance.
+    </div>
+    <div class="section7 content">
+      <span class="h1">1.4. Exercising </span><br /><br />
+      It is recommended to have at least a total of 150 minutes of moderate
+      activity per week. But breaking this number down, it doesn't have to be a
+      single session, but can be 5 days with a 30-minute exercise, which makes
+      this doable, and you can further modify it to your liking.<br /><br />
+      Here are types of exercises arranged at increasing difficulty and from
+      which you can find what suits you. Remember, go at your own pace (~Adele).
+      <br /><br /><b>Tai chi</b> <br /><br />Who said exercising has to be
+      really intensive? This exercise was assigned to us in a school report, and
+      it is recommended for people who prefer a type of meditative and light
+      exercise. It is practiced through a controlled sequence of body movements
+      specifically of the hands and feet. These are the two channels that I
+      recommended to my mother when she was trying this herself:
+      <a href="https://www.youtube.com/c/Taiflow" class="default_link"
+        >Taiflow</a
+      >
+      and
+      <a
+        href="https://www.youtube.com/c/PeterChenTaiChiLife"
+        class="default_link"
+        >PeterChenTaiChiLife</a
+      ><br /><br /><b>Walking</b><br /><br />
+      Who knew? Just consistent everyday walks and this helps your body to stay
+      healthy. <br /><br /><b>Yoga</b> <br /><br />I have attempted trying yoga
+      but my joints have proven me otherwise. If you are already flexible
+      yourself, yoga may fit just right for you. Although, I did not stick to
+      this exercise, I incorporated some of it in my workout for my stretches
+      and warm up. Here are some creators, I followed which helped me started
+      it:
+      <a href="https://www.youtube.com/c/BreatheandFlow" class="default_link"
+        >BreatheandFlow</a
+      >
+      and
+      <a href="https://www.youtube.com/c/MadFit" class="default_link">MadFit</a>
+      <br /><br /><b>Running/jogging</b><br /><br />
+      For each week, this is the app I have been using to time myself and track
+      how far I have jogged. For each day, 5 times a week, I target at least 3km
+      run; at an average I complete it in less than 30 minutes. [<a
+        href="https://play.google.com/store/apps/details?id=running.tracker.gps.map&hl=en&gl=US"
+        class="default_link"
+        >Running Tracker</a
+      >] <br /><br /><b>Workout</b><br /><br />
+      Perhaps, what comes first in mind when we talk of exercises are workout,
+      and sometimes starting sudden and big goals is quite discouraging in
+      keeping this routine long term. <br /><br />The main key to ever
+      maintaining not just working out but to every routine mentioned here:
+      first start easy, doing doable and simple starts is key in keeping the
+      ball rolling. Moreover, maintaining this routine on a day that you don't
+      feel like doing your routine, know that there are days that this will
+      happen away from enthusiastic motivation. Doing just a bit of it is key in
+      creating continuous improvements. Know that you are doing your best, and
+      each day's best is different from another. The main idea here is you don't
+      have to fully deliver everyday, just do what you can. Because keeping
+      these incremental changes is way more important than pressuring yourself
+      with high unrealistic goals which you will just suddenly stop when you are
+      discouraged from doing it.<br /><br />Start from beginner exercise, and
+      increment the difficulty of each exercise. Here is the app I have been
+      using right now,
+      <a
+        href="https://play.google.com/store/apps/details?id=homeworkout.homeworkouts.noequipment&hl=en&gl=US"
+        class="default_link"
+        >Home Workouts</a
+      >
+      <br /><br />At first, it was hard starting in the beginner exercises, and
+      just feels impossible to ever complete it. Now, I am on the advanced part
+      of my workout and I have been enjoying it ever since I started to see my
+      progression.
+    </div>
+    <div class="section6 content">
+      <span class="h1">TL; DR (Too Long; Didn't Read.)</span><br /><br />
+      Self-love doesn't have to be elaborate nor complex. These are the tips to
+      simply amp your self-care routine.<br /><br />
+      For your skincare routine, a cleanser, sunscreen and retinol routine will
+      just do magic on you. Focus on active ingredients with your skincare
+      products will be just as effective than having a long and detailed
+      routine. <br /><br />For showering, a quick 4-5 minute shower with focus
+      on cleaning your groin and armpit area is just good enough in keeping your
+      body clean. The Frequency of it highly depends on you, are you active?
+      Going sweaty? Gets body odor easily? A quick shower will help you manage
+      those. <br /><br />For sleep, make sure you have a cool, quiet resting
+      place, you can consider taking notes/journal to calm your thoughts,
+      putting away your gadgets in your bed or notching up your alarm can all
+      contribute to well-rested sleep. <br /><br />For exercising, you can
+      choose to start with either Tai-chi, walking, yoga, running/jogging or
+      exercise. You can go at your own pace in completing a total 150 minutes of
+      moderate physical activity per week.
+    </div>
+  </body>
+  <script>
+    let progressIcon = document.getElementById("progress-div");
+    let backToTop = document.getElementById("topbtn");
+    window.onscroll = function () {
+      var winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      var height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+      console.log(scrolled);
+      if (scrolled < 27.34) {
+        console.log("hidden");
+        progressIcon.style.display = "none";
+        backToTop.style.display = "none";
+      } else if (scrolled >= 27.34) {
+        console.log("display");
+        progressIcon.style.display = "flex";
+        backToTop.style.display = "block";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</html>

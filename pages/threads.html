@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap");
+      @keyframes topAnimation {
+        0% {
+          opacity: 0;
+          transform: translateY(-10%);
+          /* filter: blur(5px); */
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        height: 20vh;
+        width: 10vw;
+        min-width: 600px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      a {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 0 3px;
+        margin-left: 80px;
+      }
+      a:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: #ffffff;
+      }
+      a:hover:after {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 3;
+        font-weight: 500;
+      }
+      br {
+        font-size: 200%;
+      }
+      /**/
+      body {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: #182994;
+        font-family: "Inter", "Arial", sans-serif;
+        color: white;
+        margin: none;
+        overflow-x: hidden;
+      }
+      .logo {
+        height: 100px;
+        width: 100px;
+        float: right;
+        position: absolute;
+        top: 80px;
+        right: 80px;
+      }
+      .navbar {
+        overflow: hidden;
+        width: 100%;
+        z-index: 4;
+      }
+
+      .headline-photo {
+        width: 100vw;
+        height: 90vh;
+        position: relative;
+      }
+
+      .wallpaper {
+        width: 100vw;
+        height: 90vh;
+        position: absolute;
+      }
+      .project-name {
+        z-index: 100;
+        position: absolute;
+        font-size: 4rem;
+        padding-left: 6vw;
+        line-height: 1.2;
+        width: 80vw;
+        bottom: 5;
+        padding-bottom: 1vh;
+        padding-left: 6vw;
+        bottom: 4vh;
+        left: 0;
+      }
+      .project {
+        z-index: 100;
+        position: absolute;
+        font-size: 0.97rem;
+      }
+      .section1 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #78a22e;
+      }
+      .section2 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #656a1a;
+      }
+      .section3 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #c6a035;
+      }
+      .section4 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #719565;
+      }
+      .section5 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #69a42c;
+      }
+      .progress-bar {
+        position: fixed;
+        background-color: black;
+        top: 0;
+        width: 100%;
+        height: 2.3vh;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
+      .progress {
+        width: 300px;
+        height: 2px;
+        background: #636363;
+        float: left;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .footer {
+        position: fixed;
+        top: 0vh;
+        padding-left: 2vw;
+        width: 100%;
+        height: 3vh;
+        z-index: 5;
+        display: none;
+        align-items: center;
+        background-color: black;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      .footer .progress {
+        position: absolute;
+        width: 300px;
+        height: 2px;
+        background: #3f3f3f;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .center {
+        top: 50%;
+        left: 50%;
+      }
+      .footer .progress .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .scroll-load {
+        display: none;
+      }
+      i {
+        background: black;
+        border-radius: 500px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .img-icon {
+        display: block;
+      }
+      .topBtn {
+        display: none;
+        position: fixed;
+        bottom: 2.5vh;
+        right: 2.5vw;
+        transition: all 0.5s ease;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      figure {
+        width: 4vw;
+        height: 4vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: black;
+        transition: all 0.5s ease;
+      }
+      figure:hover {
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      figure img {
+        transition-duration: 1s;
+        display: inline-block;
+        width: 30px;
+        height: auto;
+      }
+      * {
+        scroll-behavior: smooth;
+      }
+      .h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 3vh;
+      }
+      .content {
+        font-weight: 300;
+      }
+      i {
+        background: none;
+        text-align: left;
+      }
+      ul {
+        padding-left: 3vw;
+      }
+    </style>
+    <link href="./img/page_logo.png" rel="icon" />
+    <title>J.Pean Blogspot</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="headline-photo">
+        <img class="wallpaper" src="./img/threads_wallpaper.jpg" />
+        <div class="navbar">
+          <nav>
+            <a href="../index.html">Home</a>
+            <a href="./about.html">About</a>
+            <img src="./img/page_logo.png" alt="logo" class="logo" />
+          </nav>
+        </div>
+        <span class="project-name"
+          ><span>Threads </span><br />
+          Diving into Data Science: My experiences so far...</span
+        >
+      </div>
+    </div>
+    <div class="footer" id="progress-div">
+      <span class="progress-text"
+        >Diving into Data Science: My experiences so far...</span
+      >
+      <div class="progress center">
+        <div class="bar center" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="topBtn" id="topbtn">
+      <figure onclick="scrollToTop()">
+        <img src="./img/arrow-up.png" alt="image" />
+      </figure>
+    </div>
+    <div class="section1 content">
+      <span class="h1">The Big Hook: Why?</span><br /><br />
+      Choosing Data Science has been a curveball of a path for me to choose.
+      Medicine was my first choice of career when I was at Senior High School,
+      and I have barely known the field of Computer Science. One of the reasons
+      I chose medicine was because of its wide array of applications in not just
+      saving lives but the quality of life it improves. From highly-technical
+      surgeries, to mountains of clinical trial researchers, I was fascinated by
+      its world applications that can make a difference to the world. <br />
+      <br />But it all changed when I asked one of my classmates what their
+      course they will take in college and they said Computer Science. I was at
+      first clueless as to what it was at that time, I barely recognized that
+      there was such a field, but exploring more on it I have grown to pick it
+      as a second choice in college. But the most important factor to pursue not
+      only Computer Science but specifically Data Science is because it's even
+      wider application, not just for medicine but to almost all aspects of
+      human life, from governance, disease detection, automated driving, and to
+      almost anything that requires processes and problems that needs answers.
+      In simple words, Data Science is extracting valuable insights from a pool
+      of data, in this case, data can be sourced from everything, and it has
+      been a driving agent of innovation through the years.
+    </div>
+    <div class="section2 content">
+      <span class="h1">The Fundamentals</span><br /><br />
+      Informally, Data Science suits you if you complete its ‘trifecta', the
+      three main components that if you possess, this field is for you:<br /><br />
+      1.1 Python to Rule Them All <br /><br />Data Science can be done in R,
+      Java and even C++, but nothing beats the power and versatility of Python
+      as the main programming languages of this field. Sometimes, you will need
+      to learn SQL as well, but all in all, knowing and mastering Python will be
+      a big advantage in Data Science. Not only familiarizing yourself with
+      advanced functions python can do such as errors handling, decorators, and
+      multithreading, but also utilizing specialized libraries for data science
+      such as numpy, pandas, and plotly will be your best allies in harnessing
+      its power. <br /><br />For total beginners, you could always start from
+      beginner tutorials for python to get you started and try to build a
+      project of your own so you can further learn more skills as you encounter
+      challenges; that is how I learned in my way. Remember, go at your own
+      pace. <br /><br />1.2 Math ain't just a number, it's applied!
+      <br /><br />Now, we've all been there when we question the applications of
+      math in our real lives. Now that will be the reality in data science,
+      especially these topics that will be vital to know and learn: <br /><br />
+      <ul>
+        <li>Basic Math</li>
+        <li>Calculus</li>
+        <li>Probability</li>
+        <li>Statistics</li>
+        <li>Linear Algebra</li>
+        <li>Linear Regression</li>
+        <li>Neural Networks</li>
+      </ul>
+      <br /><br />I recommend that book “Essential Math for Data Science: Take
+      Control of Your Data with Fundamental Linear Algebra, Probability, and
+      Statistics” by Thomas Nield to get you what essential math that you would
+      be using in data science. If books aren't for you, there are always
+      resources on youtube you can use as your tutorial. You can use the table
+      contents of this book so you can outline the topics you need to learn.
+      <br /><br />1.3 An Observant Eye for the World <br /><br />It is truth to
+      be told that problems reside in the world, in the gaze that seeks it. This
+      phrase does not call to turn a blinds eye for them but to gauge them to
+      seek solutions. We are surrounded by it, for data science having a good
+      domain knowledge for these problems can be key in spearheading the
+      problem. <br /><br />Being able to see problems in a programmatic view can
+      entail unlimited ways of applying data science. Do you wanna know if your
+      students are enjoying the subject? Take a survey, and you can analyze
+      their insights. Want to detect tumors in x-rays, and possibly even better
+      than most doctors? Create an artificial intelligence that can learn
+      through thousands of data sets. That's data science. A person's ability to
+      recognize problems is the first step in finding life-changing inventions
+      no matter how subtle or innovative. It only takes to believe that you can
+      be the solution to make it happen.
+    </div>
+    <div class="section3 content">
+      <span class="h1">Developing Experience </span><br /><br />
+      Now, the developer tool specifically the code editor I am using is VS Code
+      (Visual Studio Code). This software is no longer just for editing source
+      codes but has grown to be a robust and powerful tool to use not only for
+      data science but for other development fields such as Web Development
+      among others. This program is further empowered by the number of
+      extensions you can use in your programming. Here are the list of
+      extensions I use: <br /><br /><b>Code Runner </b>- Automatically run code
+      without manually doing it on terminal<br />
+      <b>Live Share</b> - Online collaboration while coding <br /><b>Jupyter </b
+      >- Jupyter Notebook support for VS Code <br /><b>Path Intellisense</b> -
+      Detect the directories you can use in your code <br /><br />Also, swaying
+      away from the old-fashioned user interface of Code editors is, in my
+      opinion, painful in the eyes. Here are some customization I use in VS Code
+      to further make its user interface aesthetic: <br /><br /><i
+        >Personal Recommendations</i
+      >
+      <br /><b>Jetbrains Mono </b>as the Editor's Font - legible and stunning at
+      the same time, no more boring font. <br /><b>Material Icon theme</b> -
+      beautiful icons that labels your file types <br /><b
+        >Atom One Dark Pro Theme </b
+      >- For rich dark theme for VS Code <br /><b>AutoPep8 </b>- Automatically
+      format your code in PEP8 (formatting convention in Python) <br /><b
+        >Rainbow CSV</b
+      >
+      - Label CSV context
+    </div>
+
+    <div class="section4 content">
+      <span class="h1">Getting Help Will Be Your Best Ally</span><br /><br />
+
+      Now, there are challenges that arise coming as unfamiliar or unsolvable,
+      but don't worry, the wisdom from thousands of developers from the past is
+      kept in some corners of the internet, namely on forums and sites. Here's
+      are the two places I go to whenever I have some bug or a problem I need to
+      fix, (hehehe tambayan sa mg Machine Problems and Exercises) <br />
+      <br /><br />Search Tip: for the first word of your search query add the
+      site you want to source your answer and then problem you want to solve
+      <br />
+      <br /><br />Example: <br /><i
+        >stackoverflow css center an image <br />
+        Reddit pandas save dataframe on csv</i
+      >
+      <br /><br /><br /><b>StackOverflow</b> - This place is filled with lots of
+      questions and surprisingly a million users that come from 14 years ago.
+      But be warned, post a question if and only if that question hasn't been
+      asked in the site in its history. And I am not exaggerating, your post
+      will receive negative votes and possibly disable you from ever posting a
+      question in the site. This mechanism mitigates the duplicated questions.
+      Just make sure that the problem you are asking is really unique and hasn't
+      been asked before. <br /><br /><br /><b>Reddit</b> - Now, for this site I
+      recommend r/learnprogramming, and depending on your question you can visit
+      r/learncss, r/learnpython, or r/learnjava, these communities are quite
+      friendly to beginners and less restrictive in the questions you ask. I
+      can't stress enough how these communities have helped me in my programming
+      experience.But do make sure the formatting rules and regulation from each
+      community, this is not limited to the format of your questions, and the
+      tags you use.
+    </div>
+    <div class="section5 content">
+      <span class="h1">TL; DR (Too Long; Didn't Read.)</span><br /><br />
+      If you have a good eye for problems around you, you enjoy applied math,
+      and you have extensive programming skills, data science may be for you. It
+      is a field in creating insights from everything around you (data). These
+      insights can turn into solutions.
+      <br /><br /><br />
+      My personal recommendation is to start small, get started with tutorials
+      and for your developing experience, VS Code can be your best ally
+      especially if you know how to customize it to your liking.
+      <br /><br /><br />
+      Lastly, the internet has become a life-changing tool for everyone, utilize
+      it. Asking for help will be one of the essential skills in learning a lot
+      of things, not just data science.
+    </div>
+  </body>
+  <script>
+    let progressIcon = document.getElementById("progress-div");
+    let backToTop = document.getElementById("topbtn");
+    window.onscroll = function () {
+      var winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      var height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+      console.log(scrolled);
+      if (scrolled < 27.34) {
+        console.log("hidden");
+        progressIcon.style.display = "none";
+        backToTop.style.display = "none";
+      } else if (scrolled >= 27.34) {
+        console.log("display");
+        progressIcon.style.display = "flex";
+        backToTop.style.display = "block";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</html>

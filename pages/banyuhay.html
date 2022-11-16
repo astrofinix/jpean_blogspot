@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap");
+      @keyframes topAnimation {
+        0% {
+          opacity: 0;
+          transform: translateY(-10%);
+          /* filter: blur(5px); */
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        height: 20vh;
+        width: 10vw;
+        min-width: 600px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      a {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 0 3px;
+        margin-left: 80px;
+      }
+      a:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: #ffffff;
+      }
+      a:hover:after {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 3;
+        font-weight: 500;
+      }
+      br {
+        font-size: 200%;
+      }
+      /**/
+      body {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: #182994;
+        font-family: "Inter", "Arial", sans-serif;
+        color: white;
+        margin: none;
+        overflow-x: hidden;
+      }
+      .logo {
+        height: 100px;
+        width: 100px;
+        float: right;
+        position: absolute;
+        top: 80px;
+        right: 80px;
+      }
+      .navbar {
+        overflow: hidden;
+        width: 100%;
+        z-index: 4;
+      }
+
+      .headline-photo {
+        width: 100vw;
+        height: 90vh;
+        position: relative;
+      }
+
+      .wallpaper {
+        width: 100vw;
+        height: 90vh;
+        position: absolute;
+        object-fit: cover;
+      }
+      .project-name {
+        z-index: 100;
+        position: absolute;
+        font-size: 4rem;
+        padding-left: 6vw;
+        line-height: 1.2;
+        width: 80vw;
+        bottom: 5;
+        padding-bottom: 1vh;
+        padding-left: 6vw;
+        bottom: 4vh;
+        left: 0;
+      }
+      .project {
+        z-index: 100;
+        position: absolute;
+        font-size: 0.97rem;
+      }
+      .section1 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #d5cbc1;
+        color: #0d0e09;
+      }
+      .section2 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #a099ac;
+      }
+      .section3 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #454041;
+      }
+      .section4 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #9f9fba;
+        color: #0d0e09;
+      }
+      .section5 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #0d0e09;
+      }
+      .section6 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #f4bc8b;
+        color: #0d0e09;
+      }
+      .progress-bar {
+        position: fixed;
+        background-color: black;
+        top: 0;
+        width: 100%;
+        height: 2.3vh;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
+      .progress {
+        width: 300px;
+        height: 2px;
+        background: #636363;
+        float: left;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .footer {
+        position: fixed;
+        top: 0vh;
+        padding-left: 2vw;
+        width: 100%;
+        height: 3vh;
+        z-index: 5;
+        display: none;
+        align-items: center;
+        background-color: black;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      .footer .progress {
+        position: absolute;
+        width: 300px;
+        height: 2px;
+        background: #3f3f3f;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .center {
+        top: 50%;
+        left: 50%;
+      }
+      .footer .progress .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .scroll-load {
+        display: none;
+      }
+      i {
+        background: black;
+        border-radius: 500px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .img-icon {
+        display: block;
+      }
+      .topBtn {
+        display: none;
+        position: fixed;
+        bottom: 2.5vh;
+        right: 2.5vw;
+        transition: all 0.5s ease;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      figure {
+        width: 4vw;
+        height: 4vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: black;
+        transition: all 0.5s ease;
+      }
+      figure:hover {
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      figure img {
+        transition-duration: 1s;
+        display: inline-block;
+        width: 30px;
+        height: auto;
+      }
+      .quote {
+        text-align: center;
+        font-style: italic;
+        line-height: 3vh;
+        padding: 5vw;
+      }
+      .quote_credit {
+        text-align: right;
+        padding: 10px;
+        font-style: italic;
+      }
+      * {
+        scroll-behavior: smooth;
+      }
+      .h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 3vh;
+      }
+      .content {
+        font-weight: 300;
+      }
+      i {
+        background: none;
+        text-align: left;
+      }
+      ul {
+        padding-left: 3vw;
+      }
+      blockquote {
+        padding: 3vw;
+      }
+    </style>
+    <link href="./img/page_logo.png" rel="icon" />
+    <title>J.Pean Blogspot</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="headline-photo">
+        <img class="wallpaper" src="./img/banyuhay_wallpaper.jpg" />
+        <div class="navbar">
+          <nav>
+            <a href="../index.html">Home</a>
+            <a href="./about.html">About</a>
+            <img src="./img/page_logo.png" alt="logo" class="logo" />
+          </nav>
+        </div>
+        <span class="project-name"
+          ><span>Banyuhay </span><br />
+          Finding a New Home: Best Countries to migrate</span
+        >
+      </div>
+    </div>
+    <div class="footer" id="progress-div">
+      <span class="progress-text"
+        >Finding a New Home: Best Countries to migrate</span
+      >
+      <div class="progress center">
+        <div class="bar center" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="topBtn" id="topbtn">
+      <figure onclick="scrollToTop()">
+        <img src="./img/arrow-up.png" alt="image" />
+      </figure>
+    </div>
+    <div class="section1 content">
+      <span class="h1"></span><br /><br />
+      During May, after the election, I did consider if given a chance to
+      migrate out of the country, which would it be? So since I was also testing
+      out my Data Science Skills, I did a survey that encompassed the criteria
+      that I will make and also accounts me as a Filipino, since there are laws
+      and requirements that made my nationality become a disadvantage and
+      sometimes an advantage (as I discovered in the process of making this
+      survey). At least speaking for the naturalization criteria, some countries
+      have advantages for Filipinos.
+    </div>
+    <div class="section2 content">
+      <span class="h1">How did I choose?</span><br /><br />
+      For this survey I did, I listed a “Grand Criteria” that I considered in
+      choosing a country to migrate to. First, I collected indexes such as
+      corruption index, democracy index, quality of life index or any measurable
+      metric. From that I deduced to just having the top 20 countries in my
+      list. Now, one by one I read a brief summary of each country’s
+      naturalization laws, a bit of their work culture, the policies and
+      services these countries have made by their government. If there are major
+      deviations from my criteria, I discarded that country and moved on to the
+      next. All in all, I have 7 honorable mentions and 3 countries that have
+      fulfilled the criteria I made.
+    </div>
+    <div class="section3 content">
+      <span class="h1">"The Grand Criteria"</span><br /><br />
+      <b>01. Relaxed Naturalization </b><br /><br />This criteria determines
+      whether the country has a relaxed, and achievable way of gaining
+      citizenship. With this right, you can vote, permanently settle, and among
+      other privileges a citizen holds in that country. <br /><br />By means of
+      achievable, and relaxed, the requirements to be naturalized are not too
+      difficult to discourage ever considering it. This includes requirements
+      such as having sufficient proficiency in the national language of that
+      country, realistic continuous periods of staying, and other test
+      requirements imposed by their government. <br /><br /><b
+        >02. Healthy Job Market and Labor Law </b
+      ><br /><br />A healthy labor law accounts for generous paid leaves,
+      including vacation and sick leave, healthy length of working hours
+      (approximately 40 hours per week), and number of opportunities to get a
+      living wage and even double the minimum wage. So most countries that are
+      initially considered were dropped off due to their toxic hustle work
+      culture and exploitative labor laws which often overworks people, and does
+      not pay a living wage among other considerations. <br /><br /><b
+        >03. Thriving Democratic Governments </b
+      ><br /><br />This metric is measured through the corruption and democracy
+      index from all countries in the world. These indexes measure how healthy
+      the governments each country has by fulfilling criterias that are
+      hallmarks in a thriving democracy, this includes having a multi-party
+      system, accessible voter rights, and other criterias listed. Likewise, for
+      the corruption index, each country is graded for how prevalent graft and
+      corruption in their countries. Its criteria also includes freedom of
+      press, and reports from Commision on Human Rights. Note that the data used
+      for the democracy and corruption index is based from its 2021 release.<br /><br />
+      <b>04. Great Quality of Life</b><br /><br />
+      From not just the quality of life index, the GDP per capita, the consumer
+      price index, and having a strong welfare state, policies were considered
+      for the criteria of great quality of life. <br /><br />The quality of life
+      index covers the overall life expectancy and life literacy of each
+      country. This index gives insight on how strong and how well-made a
+      country’s healthcare and education is built. <br /><br />For GDP per
+      capita credits the average salary of a person earns in that country and
+      usually whether a country realistically can provide a living wage or
+      beyond it. <br /><br />Consumer price index accounts for the inflation a
+      country experiences and how it affects the power of its citizens to
+      purchase basic goods and services like utilities and food.
+      <br /><br />Moreover, having a strong welfare state pertains to services
+      and programs made by governments to help its citizens to have great
+      quality of life. An example of this is having unemployment salaries until
+      the person gets to find another job, a living wage that is frequently
+      adjusted with the country’s inflation, universal healthcare, social
+      housing, and among other policies that help people to thrive in a country
+      and be raised out of poverty.
+    </div>
+
+    <div class="section4 content">
+      <span class="h1">The Honorable Mentions</span><br /><br />
+      Countries mentioned here all fulfill the grand criteria, which scored with
+      a great quality of life. However, some countries have very long
+      requirements for a period of staying in a country (10 continuous stays)
+      while also having notoriously difficult citizenship exams which even the
+      locals can’t even answer or pass. Adding to that the metric of thriving
+      democratic governments has affected slightly the standing of these
+      countries. Besides, the common denominator for all the mentioned countries
+      is having a healthy job market and labor law, competitive education
+      system. In no particular order, here are the countries with honorable
+      mention.<br /><br />
+      <ul>
+        <li>Switzerland (EU*) - scored the highest quality of life</li>
+        <li>
+          Estonia (EU)- the first highly digitized government in the world,
+          except real estate and marriages (and you can vote online)
+        </li>
+        <li>
+          Finland (EU) - reputably one of the best educations systems in the
+          world
+        </li>
+        <li>
+          Spain (EU) - you can gain citizenship for about staying just 2 years
+          the shortest from this list
+        </li>
+        <li>Canada</li>
+        <li>Denmark (EU)</li>
+        <li>Australia</li>
+        <li>Norway (EU*)</li>
+      </ul>
+      <br />
+      Note: Most of the countries listed here are members of the European Union
+      (EU) if not the European Economic Community (EU*) which has one of the
+      best labor regulations and policies in improving quality of life.
+      Moreover, any EU citizen is granted to travel to other members freely
+      without visa and can settle anywhere and establish business.
+      <img src="./img/honorable mentions.png" alt="Switzerland Estonia Finland Spain Canada Denmark Australia norway" style="width: 50vw;">
+    </div>
+    <div class="section5 content">
+      <span class="h1">The Candidates</span><br /><br />
+      <img src="./img/candidate.png" alt="new zealan germany netherlands" style="width: 50vw;">
+      All these three countries passed the grand criteria with flying colors.
+      You can be a citizen in just five continuous years, pass the citizenship
+      test, and have a sufficient level of proficiency in that country’s
+      national language. Except for Germany, they will be changing the 10 year
+      requirement into 5 years, and possibly 3 years for skilled migrants.
+      <br /><br />Also, these governments have been one of the most proactive
+      especially in taking action during the pandemic, even the rising inflation
+      right now globally, these countries have been effective in curbing prices
+      and regulating the market. Also worth-noting that the countries together
+      with the honorable mentions has progressive laws that protect someone from
+      discrimination in housing, job, and every day life. Divorce is legal, and
+      same-sex marriage is also protected.<br /><br />
+      <ul>
+        <li>New Zealand</li>
+        <li>Germany (EU)</li>
+        <li>The Netherlands (EU)</li>
+      </ul>
+    </div>
+    <div class="section6 content">
+      <span class="h1">TL; DR (Too Long; Didn't Read.)</span><br /><br />
+      If you want to migrate as a Filipino to other countries, the list I made
+      considers whether a country has laxed naturalization, healthy job market
+      and labor law, thriving democratic governments, and has a great quality of
+      life.
+      <br /><br />
+      Countries fulfilling most of the criteria that are worth mentioning as
+      well are Switzerland, Estonia, Finland, Spain, Canada, Denmark, Australia,
+      and Norway.
+      <br /><br />
+      While the three countries that passed with flying colors are New Zealand,
+      Germany, and the Netherlands.
+    </div>
+  </body>
+  <script>
+    let progressIcon = document.getElementById("progress-div");
+    let backToTop = document.getElementById("topbtn");
+    window.onscroll = function () {
+      var winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      var height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+      console.log(scrolled);
+      if (scrolled < 27.34) {
+        console.log("hidden");
+        progressIcon.style.display = "none";
+        backToTop.style.display = "none";
+      } else if (scrolled >= 27.34) {
+        console.log("display");
+        progressIcon.style.display = "flex";
+        backToTop.style.display = "block";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</html>

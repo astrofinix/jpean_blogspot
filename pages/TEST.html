@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap");
+      @keyframes topAnimation {
+        0% {
+          opacity: 0;
+          transform: translateY(-10%);
+          /* filter: blur(5px); */
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        height: 20vh;
+        width: 10vw;
+        min-width: 600px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      .navlink {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 0 3px;
+        margin-left: 80px;
+        animation: 1s ease-out 0s 1 leftAnimation;
+      }
+      .navlink:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      .navlink:hover {
+        color: #ffffff;
+      }
+      .navlink:hover:after {
+        width: 100%;
+      }
+      a {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+      }
+      a:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -1px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: #ffffff;
+      }
+      a:hover:after {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 3;
+        font-weight: 500;
+      }
+      br {
+        font-size: 200%;
+      }
+      /**/
+      body {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: black;
+        font-family: "Inter", "Arial", sans-serif;
+        color: white;
+        margin: none;
+        overflow-x: hidden;
+      }
+      .logo {
+        height: 100px;
+        width: 100px;
+        float: right;
+        position: absolute;
+        top: 80px;
+        right: 80px;
+      }
+      .navbar {
+        overflow: hidden;
+        width: 100%;
+        z-index: 4;
+      }
+      .section1 {
+        padding-top: 20vh;
+        padding-left: 10vw;
+        padding-bottom: 10vh;
+        padding-right: 50vw;
+        position: fixed;
+      }
+      .scroll-load {
+        display: none;
+      }
+      i {
+        background: black;
+        border-radius: 500px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .img-icon {
+        display: block;
+      }
+     
+      * {
+        scroll-behavior: smooth;
+      }
+      .heading {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 3vh;
+        top: 50vh;
+      }
+      i {
+        background: none;
+        text-align: left;
+      }
+      .author_photo {
+        position: fixed;
+        width: 30vw;
+        top: 30vh;
+        float: right;
+        right: 15vw;
+
+      }
+    </style>
+    <link href="./img/page_logo.png" rel="icon" />
+    <title>J.Pean Blogspot</title>
+  </head>
+
+  <body>
+    <div id="container">
+        <div class="navbar">
+          <nav>
+            <a href="../index.html" class="navlink">Home</a>
+            <a href="./about.html" class="navlink">About</a>
+            <img src="./img/page_logo.png" alt="logo" class="logo" />
+          </nav>
+        </div>
+      </div>
+    </div>
+    <img src="./img/about.png" class="author_photo">
+    <div class="section1">
+      <span class="heading">About the Author</span> <br><br>
+      A curious student heavily inspired by rich design experiences, and innovations made by artificial intelligence. Highly interested in music, machine learning, and politics.
+<br><br>
+From Bulacan, Philippines and will be based in Baguio.
+<br><br>
+//  he/him<br>
+//  Computer Science Student @ University of the Philippines <br>
+//  jfgatchalian2@up.edu.ph
+
+    </div>
+  </body>
+</html>

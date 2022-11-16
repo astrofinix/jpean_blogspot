@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap");
+      @keyframes topAnimation {
+        0% {
+          opacity: 0;
+          transform: translateY(-10%);
+          /* filter: blur(5px); */
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        height: 20vh;
+        width: 10vw;
+        min-width: 600px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      a {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 0 3px;
+        margin-left: 80px;
+      }
+      a:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: #ffffff;
+      }
+      a:hover:after {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 3;
+        font-weight: 500;
+      }
+      br {
+        font-size: 200%;
+      }
+      /**/
+      body {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: #182994;
+        font-family: "Inter", "Arial", sans-serif;
+        color: white;
+        margin: none;
+        overflow-x: hidden;
+      }
+      .logo {
+        height: 100px;
+        width: 100px;
+        float: right;
+        position: absolute;
+        top: 80px;
+        right: 80px;
+      }
+      .navbar {
+        overflow: hidden;
+        width: 100%;
+        z-index: 4;
+      }
+
+      .headline-photo {
+        width: 100vw;
+        height: 90vh;
+        position: relative;
+      }
+
+      .wallpaper {
+        width: 100vw;
+        height: 90vh;
+        position: absolute;
+        object-fit: cover;
+      }
+      .project-name {
+        z-index: 100;
+        position: absolute;
+        font-size: 4rem;
+        padding-left: 6vw;
+        line-height: 1.2;
+        width: 80vw;
+        bottom: 5;
+        padding-bottom: 1vh;
+        padding-left: 6vw;
+        bottom: 4vh;
+        left: 0;
+      }
+      .project {
+        z-index: 100;
+        position: absolute;
+        font-size: 0.97rem;
+      }
+      .section1 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #a9a294;
+      }
+      .section2 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #372d28;
+      }
+      .section3 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #605a4a;
+      }
+      .section4 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #0b0807;
+      }
+      .section5 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #302a26;
+      }
+      .section6 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #655b12;
+      }
+      .progress-bar {
+        position: fixed;
+        background-color: black;
+        top: 0;
+        width: 100%;
+        height: 2.3vh;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
+      .progress {
+        width: 300px;
+        height: 2px;
+        background: #636363;
+        float: left;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .footer {
+        position: fixed;
+        top: 0vh;
+        padding-left: 2vw;
+        width: 100%;
+        height: 3vh;
+        z-index: 5;
+        display: none;
+        align-items: center;
+        background-color: black;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      .footer .progress {
+        position: absolute;
+        width: 300px;
+        height: 2px;
+        background: #3f3f3f;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .center {
+        top: 50%;
+        left: 50%;
+      }
+      .footer .progress .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .scroll-load {
+        display: none;
+      }
+      i {
+        background: black;
+        border-radius: 500px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .img-icon {
+        display: block;
+      }
+      .topBtn {
+        display: none;
+        position: fixed;
+        bottom: 2.5vh;
+        right: 2.5vw;
+        transition: all 0.5s ease;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      figure {
+        width: 4vw;
+        height: 4vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: black;
+        transition: all 0.5s ease;
+      }
+      figure:hover {
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      figure img {
+        transition-duration: 1s;
+        display: inline-block;
+        width: 30px;
+        height: auto;
+      }
+      .quote {
+        text-align: center;
+        font-style: italic;
+        line-height: 3vh;
+        padding: 5vw;
+      }
+      .quote_credit {
+        text-align: right;
+        padding: 10px;
+        font-style: italic;
+      }
+      * {
+        scroll-behavior: smooth;
+      }
+      .h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 3vh;
+      }
+      .content {
+        font-weight: 300;
+      }
+      i {
+        background: none;
+        text-align: left;
+      }
+      ul {
+        padding-left: 3vw;
+      }
+      blockquote {
+        padding: 3vw;
+      }
+    </style>
+    <link href="./img/page_logo.png" rel="icon" />
+    <title>J.Pean Blogspot</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="headline-photo">
+        <img
+          class="wallpaper"
+          title="Credits to Center for Media Freedom and Responsibility"
+          src="./img/politique_wallpaper.jpg"
+        />
+        <div class="navbar">
+          <nav>
+            <a href="../index.html">Home</a>
+            <a href="./about.html">About</a>
+            <img src="./img/page_logo.png" alt="logo" class="logo" />
+          </nav>
+        </div>
+        <span class="project-name"
+          ><span>Politique </span><br />
+          The Philippines is at its Dark Point of No Return</span
+        >
+      </div>
+    </div>
+    <div class="footer" id="progress-div">
+      <span class="progress-text"
+        >The Philippines is at its Dark Point of No Return</span
+      >
+      <div class="progress center">
+        <div class="bar center" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="topBtn" id="topbtn">
+      <figure onclick="scrollToTop()">
+        <img src="./img/arrow-up.png" alt="image" />
+      </figure>
+    </div>
+    <div class="section1 content">
+      <span class="h1"></span><br /><br />
+      We all want long-lasting and moving change. Filipinos have long aspired
+      for change that can transform their lives to greater heights yet the force
+      to do so is on an undisrupted cycle, even worsening by the day. Listing
+      these three fundamental forces in play is key in understanding why a
+      hopeful future will neither be a swift nor easy task, especially to the
+      generation that will precede in power in governing Philippines.
+    </div>
+    <div class="section2 content">
+      <span class="h1">01. Its Laws: The Political System is Broken.</span
+      ><br /><br />
+      A country's constitution, in this case the 1987 constitution, is like a
+      blueprint in a country. It is the most basic block of a country's laws,
+      and policies for several if not years, but decades of its lifespan. It
+      also, when written or designed poorly, can perpetuate a giant stump in a
+      country's progress. <br /><br />Several flaws of the constitution that
+      have been tested by time are: having no enacting law that ends political
+      dynasties, unclear wording on how people's initiative can enact change
+      themselves, the lack of definition on how the constitution can be amended
+      or improved, and the overpower of the supreme court among others.
+      Explaining further the first four challenges mentioned, these problems are
+      a result of poorly defined powers in the constitution. For example,
+      although, the constitution prohibits political dynasties:
+      <blockquote>
+        <span class="quote"
+          >The State shall guarantee equal access to opportunities for public
+          service, and prohibit political dynasties as may be defined by law. </span
+        ><br /><span class="quote_credit">
+          ~Article 2. Section 26. 1987 Constitution.</span
+        >
+      </blockquote>
+      There is no clearly defined law that enforces it. And perhaps one of the
+      reasons why no such law exists is because 73 out of 80 provinces in the
+      Philippines, there are political dynasties that clash for power.
+      <br /><br />Another example of the constitution's lack of definition is
+      how the People can vote in making change themselves. Although framed in
+      the constitution, there is no law clearly explaining how it can be done.
+      <br /><br />
+      <blockquote>
+        <span class="quote"
+          >Amendments to this Constitution may likewise be directly proposed by
+          the people through initiative upon a petition… …The Congress shall
+          provide for the implementation of the exercise of this right. </span
+        ><br /><span class="quote_credit">
+          ~Article 18, Section 2. 1987 Constitution.</span
+        >
+      </blockquote>
+      Moving on, the power of congress to amend the constitution is vaguely
+      worded as well. Although it states that it needs three fourths of the
+      congress to propose change, it stops there without defining how the vote
+      is done either at both the house of representatives and the senate (two
+      parts of the law-making government) or separately. Thus, for years of
+      proposing amendments after another, there is yet to have change in the
+      1987 constitutions. <br /><br />Lastly, but not the last of the problems
+      embedded in the constitution, the power of the Supreme Court makes it
+      unbalanced and overpowered. First there are no limits in the length of
+      service a judge can serve, and second it’s not as independent nor co-equal
+      to the other branches. It can struck down laws, and even the voting to do
+      so can be influenced by whose president appointed them. <br /><br />This
+      major flaw is hinted at by the striking down of the “Roe v. Wade” case in
+      the United States of America (USA), where it struck down a decade long
+      protection in a safe access of abortion because of its conservative body
+      the composes the Supreme Court. Now, with the ruling, if the logic is also
+      borrowed to other cases, such as same-sex marriage, access to
+      contraception, and even interracial marrigage, these protections can be
+      struck down as well. But how does this relate to the Philippines? Well,
+      the constitution, especially the supreme court, is almost a replica from
+      the USA’s version, which means that landmark rulings by the Supreme Court
+      can be dissolved and can have long-lasting impact on the People.
+    </div>
+    <div class="section3 content">
+      <span class="h1">02. Its Government: It’s a Popularity Contest.</span
+      ><br /><br />
+      The Philippines is governed by three branches, from the President and the
+      ministries with them, the Congress, and the Supreme Court from which it
+      intends to co-regulate each other.<br /><br />
+      But, now, with the rise of populism, the government is composed by, if not
+      by political dynasties, popular people (celebrities, influences, etc.).
+      Moreover, the appointment of judges in the supreme courts and secretaries
+      in departments are those favored by the President, instead of people with
+      the right expertise and intent to serve. As for the recent years, the last
+      administration of Duterte has squashed the opposition that is supposed to
+      create a healthy discourse in making, and enacting laws. Now, it is
+      starting unravel itself the unregulated power of laws that suppress
+      people’s rights (anti-terror law) and stomp progressive laws in being
+      enforced (divorce, abortion, same-sex union, etc.). <br /><br />All in
+      all, even at the appointment of willing people in creating change, it can
+      feel as going in the grain of the system. As mentioned before, it is
+      almost impossible to amend the constitution, and that locks out laws that
+      can protect people’s rights. <blockquote>
+        <span class="quote"
+          >Marriage is a special contract of permanent union between a man and a
+          woman </span
+        ><br /><span class="quote_credit">
+          ~Chapter 1. Article 1. Family Code of the Philippines.</span
+        >
+      </blockquote>
+      For example, the legalization of divorce has
+      been in the bin of the Congress, and yet still not one has passed yet due
+      to the protection of marriage deeply embedded in the constitution. In
+      addition, the Supreme Court has repeatedly overruled and even dissolved
+      laws, for example the abortion bill passed by 2011 was strucked down, and
+      in 2019, any attempts for a same sex union is overrulled to be
+      unconstitional, all because of interpretation made from the constitution
+      which prohibits these enactments.<br /><br />
+      <blockquote>
+        <span class="quote"
+          >[The State] shall equally protect the life of the mother and the life
+          of the unborn from conception. </span
+        ><br /><span class="quote_credit">
+          ~Article 2. Section 12. 1987 Constitution.</span
+        >
+      </blockquote>
+    </div>
+
+    <div class="section4 content">
+      <span class="h1">03. Its People: A Curse of its Own.</span><br /><br />
+      The Government is, in no doubt, plagued with a lot of corruption and
+      abuses from the power vested in them, but the reason these people remain
+      in power is because of the very people that elect them. From its deprived
+      populace of education, the long curse and an almost never-ending cycle of
+      power remains; further fueled by rampant disinformation. We have seen an
+      unprecedented deprivation of people’s welfare, from accessible healthcare,
+      security of rights for all, a labor law that does not rely on
+      overexploitation, conservation of wildlife and environment among others.
+      All of which puts us behind from the world, only longing for change that
+      actually empowers us.
+    </div>
+    <div class="section5 content">
+      <span class="h1">Epilogue</span><br /><br />
+      Now, you have a glimpse of the Political Life in the Philippines, although
+      at a glance it is somewhat invisible, it is subtle yet powerful enough to
+      take a dark point of no return for all of us. <br /><br />With the
+      question, how can this change? In my view, there are two possible
+      solutions for you. Either (1) migrate to another country that guarantees
+      one’s rights and really empowers its people. Although it's not a privilege
+      for everyone, it is a well-endowed right to exit a Republic. (2) Be a
+      disruption in this cycle, a revolution, not of violence, but a catalyst of
+      change. Somehow, it is the seemingly way of ever getting out of this
+      cycle. Breaking the old constitution, to reform it to a 21st Century
+      vision of the Philippines. But this does not happen in a day, and requires
+      a fully awakened spirit of the people. Know that we do not have to be
+      severely and extremely depressed into such conditions just to realize we
+      need change.
+    </div>
+    <div class="section6 content">
+      <span class="h1">TL; DR (Too Long; Didn't Read.)</span><br /><br />
+      The Philippines is verging into a deep recession that is subtle enough to
+      pass the eyes of the majority. From its unamendable laws, a populist
+      government, and a slumbered People, all playing part in this never-ending
+      cycle. All of it boils down to getting out of it either from moving out of
+      this country or going into a long road of progress that is down to revolt
+      against the current system.
+    </div>
+  </body>
+  <script>
+    let progressIcon = document.getElementById("progress-div");
+    let backToTop = document.getElementById("topbtn");
+    window.onscroll = function () {
+      var winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      var height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+      console.log(scrolled);
+      if (scrolled < 27.34) {
+        console.log("hidden");
+        progressIcon.style.display = "none";
+        backToTop.style.display = "none";
+      } else if (scrolled >= 27.34) {
+        console.log("display");
+        progressIcon.style.display = "flex";
+        backToTop.style.display = "block";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</html>

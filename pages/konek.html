@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap");
+      @keyframes topAnimation {
+        0% {
+          opacity: 0;
+          transform: translateY(-10%);
+          /* filter: blur(5px); */
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+          filter: blur(0);
+        }
+      }
+
+      *,
+      *:before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        height: 20vh;
+        width: 10vw;
+        min-width: 600px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+      a {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 0 3px;
+        margin-left: 80px;
+      }
+      a:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        height: 2px;
+        width: 0;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: #ffffff;
+      }
+      a:hover:after {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 3;
+        font-weight: 500;
+      }
+      br {
+        font-size: 200%;
+      }
+      /**/
+      body {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        background-color: #182994;
+        font-family: "Inter", "Arial", sans-serif;
+        color: white;
+        margin: none;
+        overflow-x: hidden;
+      }
+      .logo {
+        height: 100px;
+        width: 100px;
+        float: right;
+        position: absolute;
+        top: 80px;
+        right: 80px;
+      }
+      .navbar {
+        overflow: hidden;
+        width: 100%;
+        z-index: 4;
+      }
+
+      .headline-photo {
+        width: 100vw;
+        height: 90vh;
+        position: relative;
+      }
+
+      .wallpaper {
+        width: 100vw;
+        height: 90vh;
+        position: absolute;
+        object-fit: cover;
+      }
+      .project-name {
+        z-index: 100;
+        position: absolute;
+        font-size: 4rem;
+        padding-left: 6vw;
+        line-height: 1.2;
+        width: 80vw;
+        bottom: 5;
+        padding-bottom: 1vh;
+        padding-left: 6vw;
+        bottom: 4vh;
+        left: 0;
+      }
+      .project {
+        z-index: 100;
+        position: absolute;
+        font-size: 0.97rem;
+      }
+      .section1 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #8cc7c4;
+        color: #0d0e09;
+      }
+      .section2 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #ae857c;
+      }
+      .section3 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #d9e0e3;
+        color: #0d0e09;
+      }
+      .section4 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #1f2e43;
+      }
+      .section5 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #85a2f5;
+        color: #0d0e09;
+      }
+      .section6 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #a7a77a;
+        color: #0d0e09;
+      }
+      .section7 {
+        padding-top: 10vh;
+        padding-left: 35vw;
+        padding-bottom: 10vh;
+        padding-right: 25vw;
+        background-color: #9c838e;
+      }
+      .progress-bar {
+        position: fixed;
+        background-color: black;
+        top: 0;
+        width: 100%;
+        height: 2.3vh;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
+      .progress {
+        width: 300px;
+        height: 2px;
+        background: #636363;
+        float: left;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .footer {
+        position: fixed;
+        top: 0vh;
+        padding-left: 2vw;
+        width: 100%;
+        height: 3vh;
+        z-index: 5;
+        display: none;
+        align-items: center;
+        background-color: black;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      .footer .progress {
+        position: absolute;
+        width: 300px;
+        height: 2px;
+        background: #3f3f3f;
+        align-items: center;
+        display: inline;
+        z-index: 5;
+      }
+      .center {
+        top: 50%;
+        left: 50%;
+      }
+      .footer .progress .bar {
+        width: 0%;
+        height: 2px;
+        background: white;
+      }
+      .scroll-load {
+        display: none;
+      }
+      i {
+        background: black;
+        border-radius: 500px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .img-icon {
+        display: block;
+      }
+      .topBtn {
+        display: none;
+        position: fixed;
+        bottom: 2.5vh;
+        right: 2.5vw;
+        transition: all 0.5s ease;
+        animation: 0.5s ease-out 0s 1 topAnimation;
+      }
+      figure {
+        width: 4vw;
+        height: 4vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: black;
+        transition: all 0.5s ease;
+      }
+      figure:hover {
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      figure img {
+        transition-duration: 1s;
+        display: inline-block;
+        width: 30px;
+        height: auto;
+      }
+      .quote {
+        text-align: center;
+        font-style: italic;
+        line-height: 3vh;
+        padding: 5vw;
+      }
+      .quote_credit {
+        text-align: right;
+        padding: 10px;
+        font-style: italic;
+      }
+      * {
+        scroll-behavior: smooth;
+      }
+      .h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 3vh;
+      }
+      .content {
+        font-weight: 300;
+      }
+      i {
+        background: none;
+        text-align: left;
+      }
+      ul {
+        padding-left: 3vw;
+      }
+      blockquote {
+        padding: 3vw;
+      }
+    </style>
+    <link href="./img/page_logo.png" rel="icon" />
+    <title>J.Pean Blogspot</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="headline-photo">
+        <img class="wallpaper" src="./img/konek_wallpaper.png" />
+        <div class="navbar">
+          <nav>
+            <a href="../index.html">Home</a>
+            <a href="./about.html">About</a>
+            <img src="./img/page_logo.png" alt="logo" class="logo" />
+          </nav>
+        </div>
+        <span class="project-name"
+          ><span>Konek </span><br />
+          Making the Best of Friends (in the Internet)</span
+        >
+      </div>
+    </div>
+    <div class="footer" id="progress-div">
+      <span class="progress-text"
+        >Making the Best of Friends (in the Internet)</span
+      >
+      <div class="progress center">
+        <div class="bar center" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="topBtn" id="topbtn">
+      <figure onclick="scrollToTop()">
+        <img src="./img/arrow-up.png" alt="image" />
+      </figure>
+    </div>
+    <div class="section1 content">
+      <span class="h1"></span><br /><br />
+      The following are just not specific ways to make friends on the internet,
+      but also in real life. This article contains general principles to find
+      people that will actually stick around for long and possibly one of the
+      things that keeps you sane. Finding your best allies is key in finding a
+      version of yourself, more empowered than ever.
+    </div>
+    <div class="section2 content">
+      <span class="h1">The General Rule of Thumb in Meeting People</span
+      ><br /><br />
+      People are allowed to:
+      <ul>
+        <li>to leave you</li>
+        <li>break up with you</li>
+        <li>block and leave you</li>
+        <li>not want to talk with you</li>
+        <li>move on from you</li>
+        <li>put their happiness before yours</li>
+        <li>not want you in their life</li>
+        <li>do what they want to become a better version of themselves.</li>
+      </ul>
+      And the same power also applies to YOU. <br /><br />It may come as
+      rejection, but it is inevitable for people that are incompatible. Besides,
+      it’s a good thing because it is a way of letting go, and having room for
+      something that is better and fitting.
+    </div>
+    <div class="section3 content">
+      <span class="h1">Be careful into holding people’s potential</span
+      ><br /><br />
+      This lesson was a hard pill for me. By means of this advice, watch
+      yourself when you are just clinging onto someone, of what it could be.
+      Being the only one initiating, cold conversation, and among other signs
+      are indicators that you are drifting. It can be for a lot of reasons, but
+      you cannot hold onto people’s potential. Knowing when to completely back
+      off is freeing yourself from thinking of just the possibilities and
+      looking down to reality.
+    </div>
+
+    <div class="section4 content">
+      <span class="h1">Keeping the Ball Rolling: Take the Initiative</span
+      ><br /><br />
+      Do you want to enrich your social life? Take the effort to create one. It
+      will not happen in an instant as if someone can read our minds. It will be
+      done by our actions. It takes a single spark to start a fire, likewise, it
+      takes from a single initiation to create friendships and bond with people.
+      You can invite them to play some games together, talk/call, or just any
+      activity that you can share/do together with others. Taking an active
+      initiative is a primary ingredient in creating acquaintances and from that
+      you can nurture it to be long lasting friendships <br /><br />Example: Meow meow
+      conference
+      <img src="./img/meowmeow.png" style="width: 30vw;"><br /><br />
+      These are the group of people who added me in a group chat of people
+      active in another conversation, we dabbled around each other and talked
+      about a lot of topics. An example of initiative I made is an activity we
+      did with some of my coursemates, it is a “conference” where we answer a
+      google form where we ask each other on how they vibe to specific members,
+      confess anything, or ask them certain questions, all of which are
+      anonymous. We reacted live to the answers in the google forms while in a
+      Discord Video Call, and we did this twice already. And from that it has
+      become a form of bonding between us.
+    </div>
+    <div class="section5 content">
+      <span class="h1">Be Upfront: Honesty is a well-worth risk</span
+      ><br /><br />
+      You can’t be everything with everyone, and thus, there will always be
+      people that you will not vibe with, it will be worth your energy if you
+      dedicate your true self to the right people. You can strike controversial
+      conversations, or just be who you are. From that you will know if you
+      really vibe and enjoy being with another person. This is the phase where
+      you can move someone you just met, in real life or on the internet, from
+      being acquaintances who casually talk around to real friends where you can
+      be vulnerable yourself.
+    </div>
+    <div class="section7 content">
+      <span class="h1">Finding your People</span><br /><br />
+      Here are the platforms I used in finding and where I found some good
+      internet friends. And key to a good social life is to find people you can
+      share yourself with and not change for them just to fit in. The people
+      where you can show specific corners/edges of yourself.<br /><br />
+      Discord <br /><br />
+      This app is a messaging platform unlike the traditional social media apps
+      like facebook or twitter. In my opinion, it’s more interactive and
+      feature-rich. It can be an instant messaging platform, listen and speak on
+      voice over channels, use bots that can anonymize messages, creating your
+      own community, and host some activities. I, myself, is a server admin for
+      computer science students in the University of the Philippines Baguio (2nd
+      year). On that server, we have late night talks (chismisan), games,
+      anonymous confessions, and networking with other students. Discord has
+      been a place for me where I can literally share my current activities, and
+      share them with others. <br /><br />
+      Reddit <br /><br />In this social media platform, it is by far the most
+      diverse community you can find. From cats, to programming, to politics,
+      and anything imaginable (legal only), reddit has a community for it. Some
+      of the communities I joined are r/programminghumor, r/pytorch, r/memes,
+      r/ukraine, and r/philippines to name a few. You can find people to help in
+      a problem, share your memes, and be updated to the latest field news: the
+      possibilities are endless. <br /><br />Bottled<br /><br />
+      The main catch of this app is that you can write a message in a bottle,
+      this bottle can end up in almost every country in the world. To Africa, to
+      the Americas, and Europe. You can also receive bottles in a message from
+      other people as well. This platform is where I found a lot of people from
+      around the world. And among the hundreds, literally, I have met and
+      chatted with only a single person that I have met that I have made past
+      acquaintance with to being a really good friend. From Turkey, the other
+      side of the world, he has given me insights into their daily life there
+      and has been a smart converser in a lot of stimulating controversial
+      topics, if not philosophical. And I’d say it’s well-worth on its own.
+    </div>
+    <div class="section6 content">
+      <span class="h1">TL; DR (Too Long; Didn't Read.)</span><br /><br />
+      Finding people you can share yourself with is key in finding a better
+      version of yourself. With the best friendships you can bond with them, and
+      you will grow to become who you are.<br /><br />
+      With the following principles, this can help find your people. Firstly,
+      knowing that you have the power to leave if you deem them “unvibeable” is
+      key in making room for better people. Second, always taking initiative is
+      key in making momentum with the people you interact with. Third, honesty
+      is key in finding people that can actually stay, and rejection is
+      inevitable with incompatibility.<br /><br />
+      Lastly, some platforms where you can connect with people are Reddit,
+      Discord, or Bottled among other platforms you can try on. Just know where
+      to find the good ones for you.
+    </div>
+  </body>
+  <script>
+    let progressIcon = document.getElementById("progress-div");
+    let backToTop = document.getElementById("topbtn");
+    window.onscroll = function () {
+      var winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      var height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+      console.log(scrolled);
+      if (scrolled < 27.34) {
+        console.log("hidden");
+        progressIcon.style.display = "none";
+        backToTop.style.display = "none";
+      } else if (scrolled >= 27.34) {
+        console.log("display");
+        progressIcon.style.display = "flex";
+        backToTop.style.display = "block";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</html>
