@@ -137,8 +137,8 @@ body {
   width: 10vh;
   float: right;
   position: absolute;
-  top: 80px;
-  right: 80px;
+  top: 4vw;
+  right: 4vw;
   animation: 1s ease-out 0s 1 leftAnimation;
 }
 
